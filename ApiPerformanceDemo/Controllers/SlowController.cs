@@ -21,5 +21,19 @@ namespace ApiPerformanceDemo.Controllers
 
             return Ok(data);
         }
+
+        [HttpGet("fast-data")]
+        public async Task<IActionResult> GetFastData()
+        {
+            // ✅ async non-blocking
+            await Task.Delay(300);
+
+            var data = Enumerable.Range(0, 10000)
+                                 .Select(i => $"Item {i}")
+                                 .ToList();
+
+            return Ok(data);
+        }
+
     }
 }
